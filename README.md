@@ -21,9 +21,11 @@ You should have a Codeigniter 4 installation with  Bonfire 2 installed (refer to
 
 1. Check that your `app/Config/Bonfire.php` file includes this location of the Modules: 
 
+    ```
     public $appModules = [
         'App\Modules' => APPPATH . 'Modules',
     ];
+    ```
 
 2. Copy the directory `Pages` to `app/Modules` directory of your project (or another directory, if the $appModules points to another one in your installation). 
 
