@@ -35,7 +35,7 @@ class SearchProvider extends PagesModel implements SearchProviderInterface
      */
     public function resourceName(): string
     {
-        return 'pages';
+        return lang('Pages.pages');
     }
 
     /**

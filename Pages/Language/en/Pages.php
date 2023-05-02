@@ -18,5 +18,18 @@ return [
     'excerpt'           => 'Excerpt',
     'updated'           => 'Updated',
     'pagesClassByCat'   => 'Pages classified by category',
+    // filter           
+    'headingCategory'   => 'Category',
+    'headingCreated'    => 'Created',
+    'labelDay'          => 'day',
+    'labelDays'         => 'days',
+    'labelWeek'         => 'week',
+    'labelWeeks'        => 'weeks',
+    'labelMonth'        => 'month',
+    'labelMonths'       => 'months',
+    'labelYear'         => 'year',
+    'labelArticles'     => 'Articles',
+    'labelPages'        => 'Pages',
+    'labelNews'         => 'News',
     //''       => '',
 ];

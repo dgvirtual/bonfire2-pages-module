@@ -15,27 +15,34 @@ class PagesFilter extends PagesModel
      *
      * @var array
      */
-    protected $filters = [
-        'category' => [
-            'title'   => 'Category',
-            'options' => ['Article' => 'Articles', 'Page' => 'Pages', 'News' => 'News'],
-        ],
-        'created_at' => [
-            'title'   => 'Created',
-            'options' => [
-                1   => '1 day',
-                2   => '2 days',
-                3   => '3 days',
-                7   => '1 week',
-                14  => '2 weeks',
-                30  => '1 month',
-                90  => '3 months',
-                180 => '6 months',
-                365 => '1 year',
-                366 => '> 1 year',
+    protected $filters = [];
+
+    function __construct() {
+        parent::__construct();
+
+        $this->filters = [
+            'category' => [
+                'title'   => lang('Pages.headingCategory'),
+                'options' => ['Article' => lang('Pages.labelArticles'), 'Page' => lang('Pages.labelPages'), 'News' => lang('Pages.labelNews')],
             ],
-        ],
-    ];
+            'created_at' => [
+                'title'   => lang('Pages.headingCreated'),
+                'options' => [
+                    1   => '1 ' . lang('Pages.labelDay'),
+                    2   => '2 ' . lang('Pages.labelDays'),
+                    3   => '3 ' . lang('Pages.labelDays'),
+                    7   => '1 ' . lang('Pages.labelWeek'),
+                    14  => '2 ' . lang('Pages.labelWeeks'),
+                    30  => '1 ' . lang('Pages.labelMonth'),
+                    90  => '3 ' . lang('Pages.labelMonths'),
+                    180 => '6 ' . lang('Pages.labelMonths'),
+                    365 => '1 ' . lang('Pages.year'),
+                    366 => '> 1 ' . lang('Pages.year'),
+                ],
+            ],
+        ];
+        
+    }
 
     /**
      * Provides filtering functionality.

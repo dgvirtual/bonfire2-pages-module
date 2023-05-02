@@ -3,7 +3,7 @@
 return [
     'pageTitle'         => 'Puslapiai',
     'page'              => 'Puslapis',
-    'pages'             => 'Puslapiai',
+    'pages'             => 'puslapiai',
     'newPage'           => 'Naujas puslapis',
     'editPage'          => 'Redaguoti puslapį',
     'pageWasDeleted'    => 'Šis puslapis buvo ištrintas',
@@ -18,5 +18,18 @@ return [
     'excerpt'           => 'Ištrauka',
     'updated'           => 'Atnaujinta',
     'pagesClassByCat'   => 'Puslapiai, suskirstyti pagal kategorijas',
+    // filter           
+    'headingCategory'   => 'Kategorija',
+    'headingCreated'    => 'Sukurta',
+    'labelDay'          => 'diena',
+    'labelDays'         => 'dienos',
+    'labelWeek'         => 'savaitė',
+    'labelWeeks'        => 'savaitės',
+    'labelMonth'        => 'mėnuo',
+    'labelMonths'       => 'mėnesiai',
+    'labelYear'         => 'metai',
+    'labelArticles'     => 'Straipsniai',
+    'labelPages'        => 'Puslapiai',
+    'labelNews'         => 'Naujienos',
     //''       => '',
 ];
