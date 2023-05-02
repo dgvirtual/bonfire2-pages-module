@@ -36,8 +36,8 @@ class PagesFilter extends PagesModel
                     30  => '1 ' . lang('Pages.labelMonth'),
                     90  => '3 ' . lang('Pages.labelMonths'),
                     180 => '6 ' . lang('Pages.labelMonths'),
-                    365 => '1 ' . lang('Pages.year'),
-                    366 => '> 1 ' . lang('Pages.year'),
+                    365 => '1 ' . lang('Pages.labelYear'),
+                    366 => '> 1 ' . lang('Pages.labelYear'),
                 ],
             ],
         ];
