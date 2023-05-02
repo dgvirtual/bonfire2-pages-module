@@ -58,6 +58,6 @@ class SearchProvider extends PagesModel implements SearchProviderInterface
      */
     public function resultView(): string
     {
-        return 'Search/pages';
+        return 'App\Modules\Pages\Views\_search_list';
     }
 }

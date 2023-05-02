@@ -29,9 +29,7 @@ You should have a Codeigniter 4 installation with  Bonfire 2 installed (refer to
 
 2. Copy the directory `Pages` to `app/Modules` directory of your project (or another directory, if the $appModules points to another one in your installation). 
 
-3. Copy file `pages.php` to `themes/Admin/Search/pages.php`.
-
-4. Update your `app/Config/Autoload.php` file's `$psr4` array to help Codeigniter autoloader to find the Pages module: add a key-value pair `'App\Modules\Pages' => APPPATH . 'Modules/Pages',` to the array. So, your `$psr4` array should look something like this:
+3. Update your `app/Config/Autoload.php` file's `$psr4` array to help Codeigniter autoloader to find the Pages module: add a key-value pair `'App\Modules\Pages' => APPPATH . 'Modules/Pages',` to the array. So, your `$psr4` array should look something like this:
 
     ```
     public $psr4 = [
@@ -42,7 +40,7 @@ You should have a Codeigniter 4 installation with  Bonfire 2 installed (refer to
     ```
     It is necessary at present, though it should not be (without it some aspects of your module, like the `Pages/Config/Routes.php` file, will not be found by Bonfire 2; it must be a bug in Bonfire 2...). 
 
-5. Open the `app/Config/AuthGroups.php` file and add the following permissions to the $permissions array:
+4. Open the `app/Config/AuthGroups.php` file and add the following permissions to the $permissions array:
 
     ```
     public array $permissions = [
@@ -57,13 +55,13 @@ You should have a Codeigniter 4 installation with  Bonfire 2 installed (refer to
     ];
     ```
 
-6. Also review the `array $matrix` in the same file and add the `pages.*` permissions to `superadmin` and `admin` groups and the other groups that should have permissions to access the Pages module in the admin panel. 
+5. Also review the `array $matrix` in the same file and add the `pages.*` permissions to `superadmin` and `admin` groups and the other groups that should have permissions to access the Pages module in the admin panel. 
 
-7. To update the database, run this command from the base directory of your Codeigniter install: 
+6. To update the database, run this command from the base directory of your Codeigniter install: 
 
     `php spark migrate -n App\\Modules\\Pages`
 
-8. And, if you wish (it is not necessary), you can populate the database with some pages: 
+7. And, if you wish (it is not necessary), you can populate the database with some pages: 
 
     `php spark php spark db:seed App\\Modules\\Pages\\Database\\Seeds\\InsertSamplePages`
 

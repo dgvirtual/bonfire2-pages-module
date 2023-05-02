@@ -1,10 +1,9 @@
-<?php /** This file should be copied to themes/Admin/Search/pages.php */ ?>
 <table class="table table-hover">
     <?= $this->setData(['headers' => [
         'id'            => lang('Pages.id'),
         'title'         => lang('Pages.title'),
         'excerpt'       => lang('Pages.excerpt'),
-        'updated_at'    => lang('Pages.Updated')
+        'updated_at'    => lang('Pages.updated')
     ]])->include('_table_head') ?>
     <tbody>
         <?php foreach ($rows as $page) : ?>
