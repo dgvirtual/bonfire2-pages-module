@@ -57,11 +57,32 @@ You should have a Codeigniter 4 installation with  Bonfire 2 installed (refer to
 
 5. Also review the `array $matrix` in the same file and add the `pages.*` permissions to `superadmin` and `admin` groups and the other groups that should have permissions to access the Pages module in the admin panel. 
 
-6. To update the database, run this command from the base directory of your Codeigniter install: 
+6. Configure recycler. Edit `app/Config/Recycler.php` property `$resources` by adding `pages` to it, so it looks something like:
+
+    ```
+    public $resources = [
+        'users' => [
+            'label'   => 'Users',
+            'model'   => 'Bonfire\Users\Models\UserModel',
+            'columns' => [
+                'username', 'first_name', 'last_name', 'email',
+            ],
+        ],
+        'pages' => [
+            'label'   => 'Pages',
+            'model'   => 'App\Modules\Pages\Models\PagesModel',
+            'columns' => [
+                'id', 'title', 'excerpt', 'deleted_at',
+            ],
+        ],
+    ];
+    ```
+
+7. To update the database, run this command from the base directory of your Codeigniter install: 
 
     `php spark migrate -n App\\Modules\\Pages`
 
-7. And, if you wish (it is not necessary), you can populate the database with some pages: 
+8. And, if you wish (it is not necessary), you can populate the database with some pages: 
 
     `php spark php spark db:seed App\\Modules\\Pages\\Database\\Seeds\\InsertSamplePages`
 
