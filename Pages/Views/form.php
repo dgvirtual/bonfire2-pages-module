@@ -43,7 +43,7 @@
             <!-- Content -->
             <div class="form-group col-12">
                 <label for="content" class="form-label"><?= lang('Pages.content') ?></label>
-                <textarea name="content" hx-target="#content_error" hx-post="<?= $adminLink . 'validateField/content' ?>" class="form-control" rows="5" autocomplete="content"><?= old('content', $page->content ?? '') ?></textarea>
+                <textarea id="content" name="content" hx-target="#content_error" hx-post="<?= $adminLink . 'validateField/content' ?>" class="form-control" rows="5" autocomplete="content"><?= old('content', $page->content ?? '') ?></textarea>
                 <p id="content_error" class="text-danger"><?php if (has_error('content')) echo error('content') ?></p>
             </div>
         </div>

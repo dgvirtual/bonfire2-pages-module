@@ -75,6 +75,12 @@ class PagesController extends AdminController
 
         $pagesModel = model($this->modelPrefix . 'PagesModel');
 
+        // TODO: transfer this to templates / views and make automatic
+        // $viewMeta = service('viewMeta');
+        // $viewMeta->setTitle('Sukurti puslapį' . ' | ' . setting('Site.siteName'));
+
+        $this->getTinyMCE();
+
         return $this->render($this->viewPrefix . 'form', [
             'adminLink' => $this->adminLink,
             'pageCategories' => $pagesModel->pageCategories,
@@ -91,13 +97,15 @@ class PagesController extends AdminController
         if (!auth()->user()->can('users.edit')) {
             return redirect()->back()->with('error', lang('Bonfire.notAuthorized'));
         }
-        
+
         $pagesModel = model($this->modelPrefix . 'PagesModel');
 
         $page = $pagesModel->withDeleted()->find($pageId);
         if ($page === null) {
             return redirect()->back()->with('error', lang('Bonfire.resourceNotFound', [lang('Pages.page')]));
         }
+
+        $this->getTinyMCE();
 
         return $this->render($this->viewPrefix . 'form', [
             'page'   => $page,
@@ -258,5 +266,19 @@ class PagesController extends AdminController
             $result[] = $subarray[$key];
         }
         return $result;
+    }
+
+    private function getTinyMCE() {
+
+        $viewMeta = service('viewMeta');
+        $viewMeta->addScript([
+            'src' => 'https://cdn.tiny.cloud/1/bk3sgosn5c698jq71s7svqpmompgkuzm2wr7knwb4ksxhv6t/tinymce/6/tinymce.min.js',
+            'referrerpolicy' => 'origin'
+        ]);
+        $script = view('\App\Modules\Pages\Views\_tinymce', [
+            'locale' => $this->request->getLocale(),
+            'url' => $this->adminLink . 'validateField/content', 
+        ]);
+        $viewMeta->addRawScript($script);
     }
 }
