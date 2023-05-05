@@ -53,9 +53,9 @@
             <div class="form-group col-12 col-sm-6">
                 <label for="category" class="form-label"><?= lang('Pages.category') ?></label>
                 <select name="category" class="form-select">
-                    <?php foreach ($pageCategories as $category) : ?>
-                        <option value="<?= $category ?>" <?php if (isset($page) && $page->category == $category) : ?> selected <?php endif ?>>
-                            <?= $category ?>
+                    <?php foreach ($pageCategories as $key => $value) : ?>
+                        <option value="<?= $key ?>" <?php if (isset($page) && $page->category == $key) : ?> selected <?php endif ?>>
+                            <?= $value ?>
                         </option>
                     <?php endforeach ?>
                 </select>

@@ -36,33 +36,12 @@ class PagesModel extends Model
     public function __construct()
     {
         parent::__construct();
-    protected $validationRules = [
-        'title'    => [
-            'label' => 'Title',
-            'rules' => 'required|min_length[10]|max_length[250]'
-        ],
-        'content'  => [
-            'label' => 'Content',
-            'rules' => 'required|min_length[100]'
-        ],
-        'excerpt' => [
-            'label' => 'Excerpt',
-            'rules' => 'required|min_length[10]|max_length[250]'
-        ],
-        'slug'     => [
-            'label' => 'Slug',
-            'rules' => 'permit_empty|valid_url|is_unique[pages.slug,id,{id}]|min_length[3]|max_length[250]'
-        ],
-        'category' => [
-            'label' => 'Category',
-            'rules' => 'required|in_list[News,Article,Page]'
-        ],
-    ];
 
-    protected $useTimestamps = true;
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deleted_at    = 'deleted_at';
+        $this->pageCategories = [
+            'News' => lang('Pages.labelNewsSingle'), 
+            'Article' => lang('Pages.labelArticle'), 
+            'Page' => lang('Pages.labelPage')];
+
         $this->categoriesKeys = implode(',', array_keys($this->pageCategories));
         
         $this->validationRules = [
