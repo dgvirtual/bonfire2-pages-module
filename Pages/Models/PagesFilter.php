@@ -17,16 +17,19 @@ class PagesFilter extends PagesModel
      */
     protected $filters = [];
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
 
         $this->filters = [
             'category' => [
                 'title'   => lang('Pages.headingCategory'),
+                'type'    => 'checkbox',
                 'options' => ['Article' => lang('Pages.labelArticles'), 'Page' => lang('Pages.labelPages'), 'News' => lang('Pages.labelNews')],
             ],
             'created_at' => [
                 'title'   => lang('Pages.headingCreated'),
+                'type'    => 'radio', //or 'checkbox'
                 'options' => [
                     1   => '1 ' . lang('Pages.labelDay'),
                     2   => '2 ' . lang('Pages.labelDays'),
@@ -37,11 +40,10 @@ class PagesFilter extends PagesModel
                     90  => '3 ' . lang('Pages.labelMonths'),
                     180 => '6 ' . lang('Pages.labelMonths'),
                     365 => '1 ' . lang('Pages.labelYear'),
-                    366 => '> 1 ' . lang('Pages.labelYear'),
+                    'all' => lang('Pages.labelAnyTime'),
                 ],
             ],
         ];
-        
     }
 
     /**
@@ -59,9 +61,12 @@ class PagesFilter extends PagesModel
             $this->whereIn('pages.category', $params['category']);
         }
 
-        if (isset($params['created_at']) && count($params['created_at'])) {
-            // We only use the largest value
-            $days = max($params['created_at']);
+        if (
+            isset($params['created_at'])
+            && !empty($params['created_at'])
+            && $params['created_at'] != 'all'
+        ) {
+            $days = $params['created_at'];
             $this->where('created_at >=', Time::now()->subDays($days)->toDateTimeString());
         }
 

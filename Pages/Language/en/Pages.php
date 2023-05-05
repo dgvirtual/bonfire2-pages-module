@@ -31,5 +31,17 @@ return [
     'labelArticles'     => 'Articles',
     'labelPages'        => 'Pages',
     'labelNews'         => 'News',
+    'labelArticle'      => 'Article',
+    'labelPage'        => 'Page',
+    'labelNewsSingle'   => 'News',
+    'recycler' => [
+        'label'     => 'Pages',
+        'columns'   => [
+            'id'            => 'ID',
+            'title'         => 'Title',
+            'excerpt'       => 'Excerpt',
+            'deleted_at'    => 'Deleted At',
+        ],
+    ],
     //''       => '',
 ];

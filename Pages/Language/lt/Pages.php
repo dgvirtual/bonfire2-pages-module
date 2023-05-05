@@ -31,5 +31,17 @@ return [
     'labelArticles'     => 'Straipsniai',
     'labelPages'        => 'Puslapiai',
     'labelNews'         => 'Naujienos',
+    'labelArticle'      => 'Straipsnis',
+    'labelPage'        => 'Puslapis',
+    'labelNewsSingle'   => 'Naujiena',
+    'recycler' => [
+        'label'     => 'Puslapiai',
+        'columns'   => [
+            'id'            => 'ID',
+            'title'         => 'Pavadinimas',
+            'excerpt'       => 'Ištrauka',
+            'deleted_at'    => 'Ištrinta',
+        ],
+    ],
     //''       => '',
 ];
