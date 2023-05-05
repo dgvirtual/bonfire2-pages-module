@@ -113,11 +113,13 @@ class PagesController extends AdminController
      *
      * @throws ReflectionException
      */
-    public function save(?int $pageId = null)
+    public function save()
     {
+        $pageId = $this->request->getPost('id');
         //need this link to use in ->to instead of ->back 
         //(because it is messed up by htmx validation calls)
-        $currentUrl = $this->adminLink . ($pageId ?? 'new');
+        $currentUrl = $this->adminLink . ($pageId ?: 'new');
+
         if (!auth()->user()->can('pages.edit')) {
             return redirect()->to($currentUrl)->with('error', lang('Bonfire.notAuthorized'));
         }
