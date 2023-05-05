@@ -28,6 +28,7 @@ return [
     'labelMonth'        => 'month',
     'labelMonths'       => 'months',
     'labelYear'         => 'year',
+    'labelAnyTime'      => 'at any time',
     'labelArticles'     => 'Articles',
     'labelPages'        => 'Pages',
     'labelNews'         => 'News',

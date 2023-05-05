@@ -14,7 +14,8 @@ class PagesModel extends Model
     protected $useSoftDeletes = true;
 
     // should match the categories rule in_list
-    public $pageCategories = ['News', 'Article', 'Page'];
+    public $pageCategories = [];
+    public $categoriesKeys = [];
 
     protected $allowedFields = [
         'title',
@@ -25,6 +26,16 @@ class PagesModel extends Model
         'deleted_at'
     ];
 
+    protected $validationRules = [];
+
+    protected $useTimestamps = true;
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+    protected $deleted_at    = 'deleted_at';
+
+    public function __construct()
+    {
+        parent::__construct();
     protected $validationRules = [
         'title'    => [
             'label' => 'Title',
@@ -52,6 +63,31 @@ class PagesModel extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deleted_at    = 'deleted_at';
+        $this->categoriesKeys = implode(',', array_keys($this->pageCategories));
+        
+        $this->validationRules = [
+            'title'    => [
+                'label' => lang('Pages.title'),
+                'rules' => 'required|min_length[10]|max_length[250]'
+            ],
+            'content'  => [
+                'label' => lang('Pages.content'),
+                'rules' => 'required|min_length[100]'
+            ],
+            'excerpt' => [
+                'label' => lang('Pages.excerpt'),
+                'rules' => 'required|min_length[10]|max_length[250]'
+            ],
+            'slug'     => [
+                'label' => lang('Pages.urlSlug'),
+                'rules' => 'permit_empty|valid_url|is_unique[pages.slug,id,{id}]|min_length[3]|max_length[250]'
+            ],
+            'category' => [
+                'label' => lang('Pages.category'),
+                'rules' => 'required|in_list[' . $this->categoriesKeys . ']'
+            ],
+        ];
+    }
 
     /**
      * create empty database entry

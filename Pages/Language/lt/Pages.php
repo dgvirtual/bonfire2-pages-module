@@ -28,6 +28,7 @@ return [
     'labelMonth'        => 'mėnuo',
     'labelMonths'       => 'mėnesiai',
     'labelYear'         => 'metai',
+    'labelAnyTime'      => 'bet kada',
     'labelArticles'     => 'Straipsniai',
     'labelPages'        => 'Puslapiai',
     'labelNews'         => 'Naujienos',
