@@ -9,7 +9,7 @@
 <?php if (isset($page) && $page->deleted_at !== null) : ?>
     <div class="alert danger">
         <?= lang('Pages.pageWasDeleted') . ' ' . CodeIgniter\I18n\Time::parse($page->deleted_at)->humanize() ?>.
-        <a href="<?= base_url(ADMIN_AREA . '/recycler/restore/pages/' . $page->id) ?>"><?= lang('Pages.restorePage')?></a>
+        <a href="<?= url_to('recycler-restore', 'pages', $page->id) ?>"><?= lang('Pages.restorePage')?></a>
     </div>
 <?php endif ?>
 
