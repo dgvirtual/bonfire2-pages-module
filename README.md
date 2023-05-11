@@ -19,7 +19,7 @@ Bonfire 2 includes [instructions how to make an admin module](https://github.com
 
 You should have a Codeigniter 4 installation with  Bonfire 2 installed (refer to Bonfire 2 docs to learn how to do that). 
 
-1. Check that your `app/Config/Bonfire.php` file includes this location of the Modules: 
+1. Check that your `app/Config/Bonfire.php` file includes this location of the Modules (it should, unless you changed something): 
 
     ```
     public $appModules = [
@@ -44,18 +44,13 @@ You should have a Codeigniter 4 installation with  Bonfire 2 installed (refer to
     ];
     ```
 
-5. Also review the `array $matrix` in the same file and add the `pages.*` permissions to `superadmin` and `admin` groups and the other groups that should have permissions to access the Pages module in the admin panel. 
+4. Also review the `array $matrix` in the same file and add the `pages.*` permissions to `superadmin` and `admin` groups and the other groups that should have permissions to access the Pages module in the admin panel. 
 
-6. Configure recycler. Edit `app/Config/Recycler.php` property `$resources` by adding `pages` to it, so it looks something like:
+5. Configure recycler. Edit `app/Config/Recycler.php` property `$resources` by adding `pages` to it, so it looks something like:
 
     ```
     public $resources = [
-        'users' => [
-            'label'   => 'Users',
-            'model'   => 'Bonfire\Users\Models\UserModel',
-            'columns' => [
-                'username', 'first_name', 'last_name', 'email',
-            ],
+        // Original users array here...
         ],
         'pages' => [
             'label'   => 'Pages',
@@ -66,6 +61,12 @@ You should have a Codeigniter 4 installation with  Bonfire 2 installed (refer to
         ],
     ];
     ```
+
+6. If you are using other than English language in your admin area, you will need to download
+    TinyMCE 6 language pack for your language (check [here](https://www.tiny.cloud/get-tiny/language-packages/)). 
+    Download the language pack that you use and see among the community - supported ones. Extract, rename to conform to this
+    pattern (tinymce6-lt.js") (where `lt` stands for `Lithuanian`), and copy to your theme folder 
+    `themes/Admin/js/`. Language code needs to correspond to the locale code of your language as defined in `app/Config/App.php`.
 
 7. To update the database, run this command from the base directory of your Codeigniter install: 
 
