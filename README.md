@@ -29,18 +29,7 @@ You should have a Codeigniter 4 installation with  Bonfire 2 installed (refer to
 
 2. Copy the directory `Pages` to `app/Modules` directory of your project (or another directory, if the $appModules points to another one in your installation). 
 
-3. Update your `app/Config/Autoload.php` file's `$psr4` array to help Codeigniter autoloader to find the Pages module: add a key-value pair `'App\Modules\Pages' => APPPATH . 'Modules/Pages',` to the array. So, your `$psr4` array should look something like this:
-
-    ```
-    public $psr4 = [
-        APP_NAMESPACE => APPPATH, // For custom app namespace
-        'Config'      => APPPATH . 'Config',
-        'App\Modules\Pages' => APPPATH . 'Modules/Pages',
-    ];
-    ```
-    It is necessary at present, though it should not be (without it some aspects of your module, like the `Pages/Config/Routes.php` file, will not be found by Bonfire 2; it must be a bug in Bonfire 2...). 
-
-4. Open the `app/Config/AuthGroups.php` file and add the following permissions to the $permissions array:
+3. Open the `app/Config/AuthGroups.php` file and add the following permissions to the $permissions array:
 
     ```
     public array $permissions = [
