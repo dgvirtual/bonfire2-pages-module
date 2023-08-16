@@ -33,7 +33,7 @@ class PagesController extends AdminController
         parent::initController($request, $response, $logger);
         /** user code below */
         $this->pagesFilter = model($this->modelPrefix . 'PagesFilter');
-        $this->adminLink = base_url(ADMIN_AREA . '/pages/');
+        $this->adminLink = site_url(ADMIN_AREA . '/pages/');
     }
 
     public function list()
@@ -165,7 +165,7 @@ class PagesController extends AdminController
             $page->id = $pagesModel->getInsertID();
         }
 
-        return redirect()->to(base_url($this->adminLink . $page->id))->with('message', lang('Bonfire.resourceSaved', [lang('Pages.page')]));
+        return redirect()->to(site_url($this->adminLink . $page->id))->with('message', lang('Bonfire.resourceSaved', [lang('Pages.page')]));
     }
 
     /**

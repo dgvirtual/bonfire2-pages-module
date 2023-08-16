@@ -8,7 +8,7 @@
             </div>
             <?php if (auth()->user()->can('pages.create')): ?>
                 <div class="col-auto">
-                    <a href="<?= route_to('page-new') ?>" class="btn btn-primary"><?= lang('Pages.newPage') ?></a>
+                    <a href="<?= url_to('page-new') ?>" class="btn btn-primary"><?= lang('Pages.newPage') ?></a>
                 </div>
             <?php endif ?>
         </div>

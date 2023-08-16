@@ -6,10 +6,11 @@ tinymce.init({
     language_url: '<?= asset("admin/js/tinymce6-" . $locale . ".js", "js") ?>',
     <?php endif; ?>
     menubar: false,
+    entity_encoding : 'raw',
     plugins: 'code',
     setup: function (editor) {
         editor.on('blur', function () {
-            htmx.ajax('POST', '<?= $url ?>', { target: '#content_error' });
+            htmx.ajax('POST', '<?= site_url($url) ?>', { target: '#content_error' });
         });
     },
     statusbar: false,

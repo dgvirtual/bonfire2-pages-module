@@ -2,7 +2,7 @@
 
 <?php $this->section('main') ?>
 <x-page-head>
-    <a href="<?= base_url(ADMIN_AREA . '/pages') ?>" class="back">&larr; <?= lang('Pages.pageTitle') ?></a>
+    <a href="<?= site_url(ADMIN_AREA . '/pages') ?>" class="back">&larr; <?= lang('Pages.pageTitle') ?></a>
     <h2><?= isset($page) ? lang('Pages.editPage') : lang('Pages.newPage') ?></h2>
 </x-page-head>
 
@@ -14,7 +14,7 @@
 <?php endif ?>
 
 <x-admin-box>
-    <form action="<?= $adminLink . 'save' ?>" method="post">
+    <form action="<?= site_url($adminLink . 'save') ?>" method="post">
         <?= csrf_field() ?>
 
         <?php if (isset($page) && $page !== null) : ?>
@@ -25,7 +25,7 @@
             <!-- Title -->
             <div class="form-group col-12 col-lg-6">
                 <label for="title" class="form-label"><?= lang('Pages.title') ?></label>
-                <input type="text" hx-target="#title_error" hx-post="<?= $adminLink . 'validateField/title' ?>" name="title" class="form-control" autocomplete="title" value="<?= old('title', $page->title ?? '') ?>">
+                <input type="text" hx-target="#title_error" hx-post="<?= site_url($adminLink . 'validateField/title') ?>" name="title" class="form-control" autocomplete="title" value="<?= old('title', $page->title ?? '') ?>">
                 <p id="title_error" class="text-danger"><?php if (has_error('title')) echo error('title') ?></p>
             </div>
 
@@ -33,7 +33,7 @@
             <?php if (isset($page) && $page !== null) : ?>
                 <div class="form-group col-12 col-lg-6">
                     <label for="slug" class="form-label"><?= lang('Pages.urlSlug') ?></label>
-                    <input type="text" hx-target="#slug_error" hx-trigger="keyup changed delay:500ms" hx-post="<?= $adminLink . 'validateField/slug' ?>" name="slug" class="form-control form-control-sm" autocomplete="slug" value="<?= old('slug', $page->slug ?? '') ?>">
+                    <input type="text" hx-target="#slug_error" hx-trigger="keyup changed delay:500ms" hx-post="<?= site_url($adminLink . 'validateField/slug') ?>" name="slug" class="form-control form-control-sm" autocomplete="slug" value="<?= old('slug', $page->slug ?? '') ?>">
                     <p id="slug_error" class="text-danger"><?php if (has_error('slug')) echo error('slug') ?></p>
                 </div>
             <?php endif; ?>
@@ -43,7 +43,7 @@
             <!-- Content -->
             <div class="form-group col-12">
                 <label for="content" class="form-label"><?= lang('Pages.content') ?></label>
-                <textarea id="content" name="content" hx-target="#content_error" hx-post="<?= $adminLink . 'validateField/content' ?>" class="form-control" rows="5" autocomplete="content"><?= old('content', $page->content ?? '') ?></textarea>
+                <textarea id="content" name="content" hx-target="#content_error" hx-post="<?= site_url($adminLink . 'validateField/content') ?>" class="form-control" rows="5" autocomplete="content"><?= old('content', $page->content ?? '') ?></textarea>
                 <p id="content_error" class="text-danger"><?php if (has_error('content')) echo error('content') ?></p>
             </div>
         </div>
