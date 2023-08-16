@@ -31,7 +31,7 @@ class Module extends BaseModule
         $statsItem = new StatsItem([
             'bgColor' => 'bg-blue',
             'title' => lang('Pages.pageTitle'),
-            'value' => $pages->countAll(),
+            'value' => $pages->where('deleted_at', null)->countAllResults(),
             'url' => ADMIN_AREA . '/pages',
             'faIcon' => 'fas fa-file',
         ]);
@@ -40,7 +40,7 @@ class Module extends BaseModule
         $statsItem = new ChartsItem([
             'title'   => lang('Pages.pagesClassByCat'),
             'type'   => 'pie',
-            'cssClass'   => 'col-6',
+            'cssClass'   => 'col-3',
         ]);
         $statsItem->addDataset('pages', 'category', 'id');
         $widgets->widget('charts')->collection('charts')->addItem($statsItem);
