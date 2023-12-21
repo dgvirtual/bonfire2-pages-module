@@ -74,6 +74,6 @@ You should have a Codeigniter 4 installation with  Bonfire 2 installed (refer to
 
 8. And, if you wish (it is not necessary), you can populate the database with some pages: 
 
-    `php spark php spark db:seed App\\Modules\\Pages\\Database\\Seeds\\InsertSamplePages`
+    `php spark db:seed App\\Modules\\Pages\\Database\\Seeds\\InsertSamplePages`
 
 That should be it. 
