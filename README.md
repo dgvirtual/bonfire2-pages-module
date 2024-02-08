@@ -21,7 +21,7 @@ You should have a Codeigniter 4 installation with  Bonfire 2 installed (refer to
 
 1. Check that your `app/Config/Bonfire.php` file includes this location of the Modules (it should, unless you changed something): 
 
-    ```
+    ```php
     public $appModules = [
         'App\Modules' => APPPATH . 'Modules',
     ];
@@ -31,11 +31,12 @@ You should have a Codeigniter 4 installation with  Bonfire 2 installed (refer to
 
 3. Open the `app/Config/AuthGroups.php` file and add the following permissions to the $permissions array:
 
-    ```
+    ```php
     public array $permissions = [
         // Original permissions here...
         // ...
-        // Pages module related permissions: 
+        // Pages module related permissions:
+        'pages.list'          => 'Can view list of pages',
         'pages.view'          => 'Can view pages details',
         'pages.create'        => 'Can create new pages',
         'pages.edit'          => 'Can edit existing pages',
@@ -48,7 +49,7 @@ You should have a Codeigniter 4 installation with  Bonfire 2 installed (refer to
 
 5. Configure recycler. Edit `app/Config/Recycler.php` property `$resources` by adding `pages` to it, so it looks something like:
 
-    ```
+    ```php
     public $resources = [
         // Original users array here...
         ],
