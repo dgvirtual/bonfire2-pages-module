@@ -165,7 +165,7 @@ class PagesController extends AdminController
             $page->id = $pagesModel->getInsertID();
         }
 
-        return redirect()->to(site_url($this->adminLink . $page->id))->with('message', lang('Bonfire.resourceSaved', [lang('Pages.page')]));
+        return redirect()->to($this->adminLink . $page->id)->with('message', lang('Bonfire.resourceSaved', [lang('Pages.page')]));
     }
 
     /**
