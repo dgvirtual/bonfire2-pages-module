@@ -45,6 +45,9 @@ class PagesModel extends Model
         $this->categoriesKeys = implode(',', array_keys($this->pageCategories));
         
         $this->validationRules = [
+            'id'    => [
+                'rules' => 'permit_empty|numeric'
+            ],
             'title'    => [
                 'label' => lang('Pages.title'),
                 'rules' => 'required|min_length[10]|max_length[250]'
