@@ -272,7 +272,7 @@ class PagesController extends AdminController
 
         $viewMeta = service('viewMeta');
         $viewMeta->addScript([
-            'src' => 'https://cdn.tiny.cloud/1/bk3sgosn5c698jq71s7svqpmompgkuzm2wr7knwb4ksxhv6t/tinymce/6/tinymce.min.js',
+            'src' => 'https://cdn.tiny.cloud/1/' . config('Pages')->tinymceApiKey . '/tinymce/6/tinymce.min.js',
             'referrerpolicy' => 'origin'
         ]);
         $script = view('\App\Modules\Pages\Views\_tinymce', [
