@@ -165,7 +165,7 @@ class PagesController extends AdminController
             $page->id = $pagesModel->getInsertID();
         }
 
-        return redirect()->to(site_url($this->adminLink . $page->id))->with('message', lang('Bonfire.resourceSaved', [lang('Pages.page')]));
+        return redirect()->to($this->adminLink . $page->id)->with('message', lang('Bonfire.resourceSaved', [lang('Pages.page')]));
     }
 
     /**
@@ -272,7 +272,7 @@ class PagesController extends AdminController
 
         $viewMeta = service('viewMeta');
         $viewMeta->addScript([
-            'src' => 'https://cdn.tiny.cloud/1/bk3sgosn5c698jq71s7svqpmompgkuzm2wr7knwb4ksxhv6t/tinymce/6/tinymce.min.js',
+            'src' => 'https://cdn.tiny.cloud/1/' . config('Pages')->tinymceApiKey . '/tinymce/6/tinymce.min.js',
             'referrerpolicy' => 'origin'
         ]);
         $script = view('\App\Modules\Pages\Views\_tinymce', [
