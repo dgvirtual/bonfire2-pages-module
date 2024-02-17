@@ -69,11 +69,14 @@ You should have a Codeigniter 4 installation with  Bonfire 2 installed (refer to
     pattern (tinymce6-lt.js") (where `lt` stands for `Lithuanian`), and copy to your theme folder 
     `themes/Admin/js/`. Language code needs to correspond to the locale code of your language as defined in `app/Config/App.php`.
 
-7. To update the database, run this command from the base directory of your Codeigniter install: 
+7. Copy the `Config/Pages.php` file to `app/Config`, change it's namespace to `\Config` and update the `$tinymceApiKey` variable
+   with your own TinyMCE API key (https://www.tiny.cloud/auth/signup/). Without this step the page editor will be read-only.
+   
+8. To update the database, run this command from the base directory of your Codeigniter install: 
 
     `php spark migrate -n App\\Modules\\Pages`
 
-8. And, if you wish (it is not necessary), you can populate the database with some pages: 
+9. And, if you wish (it is not necessary), you can populate the database with some pages: 
 
     `php spark db:seed App\\Modules\\Pages\\Database\\Seeds\\InsertSamplePages`
 
