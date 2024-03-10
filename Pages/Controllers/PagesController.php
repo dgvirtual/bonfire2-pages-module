@@ -11,6 +11,7 @@ use Psr\Log\LoggerInterface;
 
 use Bonfire\Core\AdminController;
 use CodeIgniter\I18n\Time;
+use App\Modules\Pages\Entities\Page;
 
 //use CodeIgniter\Database\Exceptions\DataException;
 
@@ -42,7 +43,7 @@ class PagesController extends AdminController
             return redirect()->to(ADMIN_AREA)->with('error', lang('Bonfire.notAuthorized'));
         }
 
-        // will need to replace next with 
+        // will need to replace next with
         $this->pagesFilter->filter($this->request->getPost('filters'));
 
         $view = $this->request->is('post')
@@ -74,7 +75,8 @@ class PagesController extends AdminController
         }
 
         $pagesModel = model($this->modelPrefix . 'PagesModel');
-
+        $page       = new Page();
+        //dd($page->id);
         // TODO: transfer this to templates / views and make automatic
         // $viewMeta = service('viewMeta');
         // $viewMeta->setTitle('Sukurti puslapį' . ' | ' . setting('Site.siteName'));
@@ -82,6 +84,7 @@ class PagesController extends AdminController
         $this->getTinyMCE();
 
         return $this->render($this->viewPrefix . 'form', [
+            'page' => $page,
             'adminLink' => $this->adminLink,
             'pageCategories' => $pagesModel->pageCategories,
         ]);
@@ -107,6 +110,7 @@ class PagesController extends AdminController
 
         $this->getTinyMCE();
 
+        helper('form');
         return $this->render($this->viewPrefix . 'form', [
             'page'   => $page,
             'adminLink' => $this->adminLink,
@@ -124,7 +128,7 @@ class PagesController extends AdminController
     public function save()
     {
         $pageId = $this->request->getPost('id');
-        //need this link to use in ->to instead of ->back 
+        //need this link to use in ->to instead of ->back
         //(because it is messed up by htmx validation calls)
         $currentUrl = $this->adminLink . ($pageId ?: 'new');
 
@@ -136,9 +140,9 @@ class PagesController extends AdminController
 
         $page = $pageId !== null
             ? $pagesModel->find($pageId)
-            : $pagesModel->newPage();
+            : new Page();
 
-        /** 
+        /**
          * if there is a page id (so we run an update operation)
          * but such page is not in db:
          */
@@ -148,22 +152,46 @@ class PagesController extends AdminController
         }
 
         /** set the post values to the object */
-        foreach ($this->request->getPost() as $key => $value) {
-            $page->$key = $value;
-        }
+        // foreach ($this->request->getPost() as $key => $value) {
+        //     $page->$key = $value;
+        // }
+        $page->fill($this->request->getPost());
 
-        /** update slug if needed */
+        /** update slug if needed; should this go into entity? */
         $page->slug = $this->updateSlug($page->slug, $page->title, ($page->id ?? null));
         $page->excerpt = mb_substr(strip_tags($page->content), 0, 100) . '...';
 
-        /** attempt validate and save */
-        if ($pagesModel->save($page) === false) {
-            return redirect()->to($currentUrl)->withInput()->with('errors', $pagesModel->errors());
+        $validation = \Config\Services::validation();
+
+        /** add validation rules of meta to the model */
+        $validation->setRules(array_merge($pagesModel->validationRules, $page->validationRules('meta')));
+
+        //$pagesModel->checkRules();
+
+        /** attempt validate */
+        if (! $validation->run($page->toArray())) {
+            //dd($validation->getErrors());
+            return redirect()->to($currentUrl)->withInput()->with('errors', $validation->getErrors());
+        }
+
+        /** do the saving */
+        if ($page->hasChanged('title') || $page->hasChanged('slug') || $page->hasChanged('content') || $page->hasChanged('category')) {
+            $pagesModel->save($page);
         }
 
         if (!isset($page->id) || !is_numeric(($page->id))) {
             $page->id = $pagesModel->getInsertID();
         }
+
+        // Save the Page's meta fields
+        // d($this->request->getPost('meta'));
+        // dd($page);
+        // $post = [
+        //     'published' => 'true',
+        //     'author_name' => 'Donatas',
+        // ];
+
+        $page->syncMeta($this->request->getPost('meta') ?? [], 'Pages');
 
         return redirect()->to($this->adminLink . $page->id)->with('message', lang('Bonfire.resourceSaved', [lang('Pages.page')]));
     }
@@ -195,7 +223,7 @@ class PagesController extends AdminController
     }
 
 
-    /** 
+    /**
      * Deletes multiple pages from the database.
      * Called via the checked() records in the table.
      */
@@ -228,7 +256,7 @@ class PagesController extends AdminController
     {
         $pagesModel = model($this->modelPrefix . 'PagesModel');
         $validation = \Config\Services::validation();
-        $validation->setRules($pagesModel->getValidationRules(['only' => [$fieldName]]));
+        $validation->setRules($pagesModel->getValidationRules(['only' => [$fieldName, 'id']]));
         $validation->withRequest($this->request)->run();
 
         return $validation->getError($fieldName);
@@ -268,7 +296,8 @@ class PagesController extends AdminController
         return $result;
     }
 
-    private function getTinyMCE() {
+    private function getTinyMCE()
+    {
 
         $viewMeta = service('viewMeta');
         $viewMeta->addScript([
@@ -277,7 +306,7 @@ class PagesController extends AdminController
         ]);
         $script = view('\App\Modules\Pages\Views\_tinymce', [
             'locale' => $this->request->getLocale(),
-            'url' => $this->adminLink . 'validateField/content', 
+            'url' => $this->adminLink . 'validateField/content',
         ]);
         $viewMeta->addRawScript($script);
     }

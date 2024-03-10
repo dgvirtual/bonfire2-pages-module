@@ -3,14 +3,13 @@
 namespace App\Modules\Pages\Models;
 
 use CodeIgniter\Model;
-use stdClass;
 
 class PagesModel extends Model
 {
     protected $table      = 'pages';
     protected $primaryKey = 'id';
 
-    protected $returnType = 'object'; // default array
+    protected $returnType = \App\Modules\Pages\Entities\Page::class; // default array
     protected $useSoftDeletes = true;
 
     // should match the categories rule in_list
@@ -26,7 +25,7 @@ class PagesModel extends Model
         'deleted_at'
     ];
 
-    protected $validationRules = [];
+    public $validationRules = [];
 
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
@@ -38,12 +37,12 @@ class PagesModel extends Model
         parent::__construct();
 
         $this->pageCategories = [
-            'News' => lang('Pages.labelNewsSingle'), 
-            'Article' => lang('Pages.labelArticle'), 
-            'Page' => lang('Pages.labelPage')];
+            'News'    => lang('Pages.labelNewsSingle'),
+            'Article' => lang('Pages.labelArticle'),
+            'Page'    => lang('Pages.labelPage')];
 
         $this->categoriesKeys = implode(',', array_keys($this->pageCategories));
-        
+
         $this->validationRules = [
             'id'    => [
                 'rules' => 'permit_empty|numeric'
@@ -69,17 +68,5 @@ class PagesModel extends Model
                 'rules' => 'required|in_list[' . $this->categoriesKeys . ']'
             ],
         ];
-    }
-
-    /**
-     * create empty database entry
-     */
-    public function newPage(): object
-    {
-        $page = new stdClass();
-        foreach ($this->allowedFields as $field) {
-            $page->$field = null;
-        }
-        return $page;
     }
 }
