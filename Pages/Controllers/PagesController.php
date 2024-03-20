@@ -183,7 +183,7 @@ class PagesController extends AdminController
             $page->id = $pagesModel->getInsertID();
         }
 
-        $page->syncMeta('Pages', $this->request->getPost('meta') ?? []);
+        $page->syncMeta($this->request->getPost('meta') ?? []);
 
         return redirect()->to($this->adminLink . $page->id)->with('message', lang('Bonfire.resourceSaved', [lang('Pages.page')]));
     }
