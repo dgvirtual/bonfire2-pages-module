@@ -34,7 +34,7 @@ class PageCells
                 }
             }
             //dd(lang($fieldGroup));
-            if (lang($fieldGroup) != $fieldGroup) {
+            if (lang($fieldGroup) !== $fieldGroup) {
                 $metaFieldsUpd[lang($fieldGroup)] = $metaFields[$fieldGroup];
             }
             else {

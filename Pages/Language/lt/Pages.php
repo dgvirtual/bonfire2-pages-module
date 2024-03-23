@@ -48,6 +48,7 @@ return [
     'entry_status' => 'Įrašo būsena',
     'author_info'  => 'Autoriaus informacija',
     //Pages metadata:
+    'author_name'       => 'Autoriaus vardas',
     'fb_page'       => 'Autoriaus FB profilis',
     'published'     => 'Paskelbta',
     'show_contacts' => 'Rodyti kontaktų bloką',

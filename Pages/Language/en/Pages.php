@@ -49,6 +49,7 @@ return [
     'entry_status' => 'Entry Status',
     'author_info'  => 'Author Info',
     //Pages metadata:
+    'author_name'       => 'Author name',
     'fb_page'       => 'FB profile',
     'published'     => 'Published',
     'show_contacts' => 'Show contact block',
