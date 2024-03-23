@@ -11,14 +11,14 @@ class Pages extends BaseConfig
     public string $tinymceApiKey = 'no-api-key';
 
     public $metaFields = [
-        'Article Status' => [
-            'published' => ['label' => 'Published', 'type' => 'checkbox', 'validation' => ['label' => 'Published', 'rules' => 'permit_empty|string']],
+        'Pages.entry_status' => [
+            'published' => ['label' => 'Pages.published', 'type' => 'checkbox', 'validation' => ['label' => 'Published', 'rules' => 'required|in_list[true,false]']],
         ],
-        'Author Info' => [
-            'author_name' => ['label' => 'Author Name', 'type' => 'text', 'validation' => ['label' => 'Author Name', 'rules' => 'required|string']],
-            'show_author' => ['label' => 'Show Contacts', 'type' => 'checkbox', 'validation' => ['label' => 'Show Contacts', 'rules' => 'permit_empty|in_list[true,false]']],
-            'fb' => ['label' => 'Author Facebook Page', 'type' => 'text', 'validation' => ['label' => 'Author Facebook Page', 'rules' => 'permit_empty|valid_url']],
-            'email' => ['label' => 'Author Email', 'type' => 'text', 'validation' => ['label' => 'Author Email', 'rules' => 'permit_empty|valid_email']],
+        'Pages.author_info' => [
+            'author_name' => ['label' => 'Pages.author_name', 'type' => 'text', 'validation' => ['label' => 'Author Name', 'rules' => 'required|string']],
+            'show_author' => ['label' => 'Pages.show_contacts', 'type' => 'checkbox', 'validation' => ['label' => 'Pages.show_contacts', 'rules' => 'required|in_list[true,false]']],
+            'fb' => ['label' => 'Pages.fb_page','type' => 'text', 'validation' => ['label' => 'Pages.fb_page', 'rules' => 'required|valid_url_strict[https]']],
+            'email' => ['label' => 'Pages.author_email', 'type' => 'text', 'validation' => ['label' => 'Pages.author_email', 'rules' => 'required|valid_email']],
         ],
     ];
 }

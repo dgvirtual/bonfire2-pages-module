@@ -18,7 +18,7 @@ return [
     'excerpt'           => 'Ištrauka',
     'updated'           => 'Atnaujinta',
     'pagesClassByCat'   => 'Puslapiai, suskirstyti pagal kategorijas',
-    // filter           
+    // filter
     'headingCategory'   => 'Kategorija',
     'headingCreated'    => 'Sukurta',
     'labelDay'          => 'diena',
@@ -44,5 +44,13 @@ return [
             'deleted_at'    => 'Ištrinta',
         ],
     ],
+    // Meta input groups
+    'entry_status' => 'Įrašo būsena',
+    'author_info'  => 'Autoriaus informacija',
+    //Pages metadata:
+    'fb_page'       => 'Autoriaus FB profilis',
+    'published'     => 'Paskelbta',
+    'show_contacts' => 'Rodyti kontaktų bloką',
+    'author_email'  => 'Autoriaus el. p. adresas',
     //''       => '',
 ];

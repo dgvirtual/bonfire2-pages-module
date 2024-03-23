@@ -44,5 +44,14 @@ return [
             'deleted_at'    => 'Deleted At',
         ],
     ],
+
+    // Meta input groups
+    'entry_status' => 'Entry Status',
+    'author_info'  => 'Author Info',
+    //Pages metadata:
+    'fb_page'       => 'FB profile',
+    'published'     => 'Published',
+    'show_contacts' => 'Show contact block',
+    'author_email'  => 'Author email',
     //''       => '',
 ];

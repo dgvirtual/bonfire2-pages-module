@@ -15,21 +15,11 @@
                     name="meta[<?= strtolower($field) ?>]"
                     value="true"
                     <?= set_checkbox('meta.' . strtolower($field), 'true', ($page->meta(strtolower($field))) === 'true') ?>>
-                <?php if (!isset($info['label'])) : ?>
-                <label for="meta[<?= $field ?>]"
-                    class="form-check-label"><?= esc(ucwords(strtolower(str_replace(['-', '_'], ' ', $field)))) ?></label>
-                <?php else : ?>
-                <label for="meta[<?= $field ?>]"
-                    class="form-check-label"><?= esc($info['label']) ?></label>
-                <?php endif ?>
+                <label for="meta[<?= $field ?>]" class="form-check-label"><?= esc($info['label']) ?></label>
             </div>
             <?php elseif ($info['type'] === 'textarea') : ?>
                 <div class="form-group col-12 col-lg-6">
-                    <?php if (! isset($info['label'])) : ?>
-                        <label for="meta[<?= $field ?>]" class="form-label"><?= esc(ucwords(strtolower(str_replace(['-', '_'], ' ', $field)))) ?></label>
-                    <?php else : ?>
-                        <label for="meta[<?= $field ?>]" class="form-label"><?= esc($info['label']) ?></label>
-                    <?php endif ?>
+                    <label for="meta[<?= $field ?>]" class="form-label"><?= esc($info['label']) ?></label>
                     <textarea class="form-control" rows="3" name="meta[<?= strtolower($field) ?>]"
                         ><?= old('meta[' . strtolower($field) . ']', $user->meta(strtolower($field)) ?? '') ?></textarea>
                     <?php if (has_error('meta.' . $field)) : ?>
@@ -38,13 +28,7 @@
                 </div>
             <?php elseif (in_array($info['type'], ['text', 'number', 'password', 'email', 'tel', 'url', 'date', 'time', 'week', 'month', 'color'])) : ?>
                 <div class="form-group col-12 col-md-6">
-                    <?php if (! isset($info['label'])) : ?>
-                        <label for="meta[<?= $field ?>]"
-                            class="form-label"><?= esc(ucwords(strtolower(str_replace(['-', '_'], ' ', $field)))) ?></label>
-                    <?php else : ?>
-                        <label for="meta[<?= $field ?>]"
-                            class="form-label"><?= esc($info['label']) ?></label>
-                    <?php endif ?>
+                    <label for="meta[<?= $field ?>]" class="form-label"><?= esc($info['label']) ?></label>
                     <input type="text"
                         name="meta[<?= strtolower($field) ?>]"
                         class="form-control"
