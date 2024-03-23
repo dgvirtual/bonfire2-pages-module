@@ -105,10 +105,9 @@
         <!-- Pages Meta Fields -->
         <?= view_cell('\App\Modules\Pages\Libraries\PageCells::metaFormFields', ['page' => $page]) ?>
 
-
-        <div class="text-end pt-2 pb-1">
-            <input type="submit" value="<?= lang('Pages.savePage') ?>" class="btn btn-primary btn-lg">
-        </div>
+        <x-button-container>
+            <x-button><?= lang('Pages.savePage') ?></x-button>
+        </x-button-container>
 
     </form>
 

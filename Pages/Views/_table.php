@@ -19,8 +19,8 @@
 </div>
 
 <?php if (auth()->user()->can('pages.delete')) : ?>
-    <input type="submit" value="<?= lang('Pages.deleteSelected') ?>" class="btn btn-sm btn-outline-danger" />
-<?php endif ?>
+    <x-button color="outline-danger"><?= lang('Pages.deleteSelected') ?></x-button>
+    <?php endif ?>
 
 <div class="text-center">
     <?= $pager->links('default', 'bonfire_full') ?>
