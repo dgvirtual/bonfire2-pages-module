@@ -31,7 +31,7 @@ return [
     'labelAnyTime'      => 'bet kada',
     'labelArticles'     => 'Straipsniai',
     'labelPages'        => 'Puslapiai',
-    'labelNews'         => 'Naujienos',
+    'labelNews'         => 'Naujiena',
     'labelArticle'      => 'Straipsnis',
     'labelPage'        => 'Puslapis',
     'labelNewsSingle'   => 'Naujiena',
