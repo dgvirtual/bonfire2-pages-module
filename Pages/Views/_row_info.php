@@ -1,6 +1,7 @@
 <td><?= esc($page->id) ?></td>
 <td><?= esc($page->title) ?></td>
 <td><?= esc($page->excerpt) ?></td>
+<td><?= esc(lang('Pages.label' . $page->category)) ?></td>
 <td><?= esc($page->updated_at) ?></td>
 <td class="justify-content-end">
     <?php if (auth()->user()->can('pages.edit') || auth()->user()->can('pages.delete')): ?>

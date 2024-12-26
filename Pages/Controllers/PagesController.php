@@ -44,9 +44,9 @@ class PagesController extends AdminController
         }
 
         // will need to replace next with
-        $this->pagesFilter->filter($this->request->getPost('filters'));
+        $this->pagesFilter->filter($this->request->getGet('filters'));
 
-        $view = $this->request->is('post')
+        $view = $this->request->hasHeader('HX-Request')
             ? $this->viewPrefix . '_table'
             : $this->viewPrefix . 'list';
 
@@ -56,6 +56,7 @@ class PagesController extends AdminController
                 'id'            => lang('Pages.id'),
                 'title'         => lang('Pages.title'),
                 'excerpt'       => lang('Pages.excerpt'),
+                'category'      => lang('Pages.category'),
                 'updated_at'    => lang('Pages.updated'),
             ],
             'showSelectAll' => true,
@@ -83,6 +84,7 @@ class PagesController extends AdminController
 
         $this->getTinyMCE();
 
+        helper('form');
         return $this->render($this->viewPrefix . 'form', [
             'page' => $page,
             'adminLink' => $this->adminLink,
