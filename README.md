@@ -85,7 +85,7 @@ You should have a Codeigniter 4 installation with  Bonfire 2 installed (refer to
 
     `php spark migrate -n App\\Modules\\Pages --all`
 
-9. And, if you wish (it is not necessary), you can populate the database with some pages:
+9. And, if you wish (it is not necessary), you can populate the database with some randomly generated pages:
 
     `php spark db:seed App\\Modules\\Pages\\Database\\Seeds\\InsertSamplePages`
 
