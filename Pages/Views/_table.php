@@ -21,7 +21,7 @@
     </div>
 
     <?php if (auth()->user()->can('pages.delete')) : ?>
-        <x-button color="outline-danger"><?= lang('Pages.deleteSelected') ?></x-button>
+        <x-button onclick="return confirm('<?= lang('Bonfire.deleteSelectedConfirm', [lang('Pages.pagesAccusative')]) ?>')" color="outline-danger"><?= lang('Pages.deleteSelected') ?></x-button>
     <?php endif ?>
 </form>
 <div class="text-center">

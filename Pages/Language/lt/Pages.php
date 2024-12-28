@@ -4,6 +4,7 @@ return [
     'pageTitle'         => 'Puslapiai',
     'page'              => 'Puslapis',
     'pages'             => 'puslapiai',
+    'pagesAccusative'   => 'puslapius',
     'newPage'           => 'Naujas puslapis',
     'editPage'          => 'Redaguoti puslapį',
     'pageWasDeleted'    => 'Šis puslapis buvo ištrintas',

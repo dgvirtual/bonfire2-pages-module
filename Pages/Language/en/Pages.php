@@ -4,6 +4,7 @@ return [
     'pageTitle'         => 'Pages',
     'page'              => 'page',
     'pages'             => 'pages',
+    'pagesAccusative'   => 'pages',
     'newPage'           => 'New Page',
     'editPage'          => 'Edit Page',
     'pageWasDeleted'    => 'This page was deleted',
@@ -18,7 +19,7 @@ return [
     'excerpt'           => 'Excerpt',
     'updated'           => 'Updated',
     'pagesClassByCat'   => 'Pages classified by category',
-    // filter           
+    // filter
     'headingCategory'   => 'Category',
     'headingCreated'    => 'Created',
     'labelDay'          => 'day',
