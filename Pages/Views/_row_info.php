@@ -3,7 +3,7 @@
 <td><?= esc($page->excerpt) ?></td>
 <td><?= esc(lang('Pages.label' . $page->category)) ?></td>
 <td><?= esc($page->updated_at) ?></td>
-<td class="justify-content-end">
+<td class="text-end">
     <?php if (auth()->user()->can('pages.edit') || auth()->user()->can('pages.delete')): ?>
         <!-- Action Menu -->
         <div class="dropdown">

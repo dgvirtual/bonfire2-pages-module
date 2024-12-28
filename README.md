@@ -89,4 +89,4 @@ You should have a Codeigniter 4 installation with  Bonfire 2 installed (refer to
 
     `php spark db:seed App\\Modules\\Pages\\Database\\Seeds\\InsertSamplePages`
 
-That should be it.
+(on Windows replace double slashes with single). That should be it.
