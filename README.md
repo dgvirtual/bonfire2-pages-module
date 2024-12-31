@@ -70,8 +70,14 @@ You should have a Codeigniter 4 installation with  Bonfire 2 installed (refer to
     pattern (tinymce6-lt.js") (where `lt` stands for `Lithuanian`), and copy to your theme folder
     `themes/Admin/js/`. Language code needs to correspond to the locale code of your language as defined in `app/Config/App.php`.
 
-7. Copy Pages/Config/Pages.php file to app/Config, in the copied file change the namespace declaration to `Config` 
-   and `use` line to `use App\Modules\Pages\Config\Pages;
+7. Copy Pages/Config/Pages.php file to app/Config, and in the copied file change the top of file so it looks like this: 
+
+    ```php
+    <?php
+    namespace Config;
+    use App\Modules\Pages\Config\Pages as BasePages;
+    class Pages extends BasePages
+    ```
 
 8. Get your own TinyMCE API key (https://www.tiny.cloud/auth/signup/), add a section to your project `.env` file with your api key:
 
