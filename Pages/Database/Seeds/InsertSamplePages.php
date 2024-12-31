@@ -15,7 +15,7 @@ class InsertSamplePages extends Seeder
         $data = [];
         for ($i = 0; $i < 100; $i++) {
             $timestamp = $faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d H:i:s');
-            $title = $faker->sentence(rand(3, 7));
+            $title = rtrim($faker->sentence(rand(3, 7)), '.');
             $contentParagraphs = $faker->paragraphs(rand(30, 50));
             $content = '<p>' . implode('</p><p>', $contentParagraphs) . '</p>';
             $slug = url_title($title, '-', true);
