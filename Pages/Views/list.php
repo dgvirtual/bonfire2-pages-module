@@ -20,12 +20,12 @@
 
             <div class="row">
                 <!-- List Pages -->
-                <div class="col" id="content-list">
+                <div class="col order-2 order-md-1" id="content-list">
                     <?= $this->include('App\Modules\Pages\Views\_table') ?>
                 </div>
 
                 <!-- Filters -->
-                <div class="col-auto" x-show="filtered" x-transition.duration.240ms>
+                <div class="col-auto order-1 order-md-2" x-show="filtered" x-transition.duration.240ms>
                     <?= view_cell('Bonfire\Core\Cells\Filters::renderList', 'model=App\Modules\Pages\Models\PagesFilter target=#content-list') ?>
                 </div>
             </div>
