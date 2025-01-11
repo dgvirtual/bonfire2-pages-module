@@ -4,7 +4,7 @@
  */
 $routes->group(ADMIN_AREA, ['namespace' => 'App\Modules\Pages\Controllers'], static function ($routes) {
     //  Manage Pages
-    $routes->match(['get', 'post'],'pages', 'PagesController::list', ['as' => 'pages-list']);
+    $routes->match(['GET', 'POST'],'pages', 'PagesController::list', ['as' => 'pages-list']);
     $routes->get('pages/new', 'PagesController::create', ['as' => 'page-new']);
     $routes->post('pages/save', 'PagesController::save');
     $routes->get('pages/(:num)', 'PagesController::edit/$1', ['as' => 'page-edit']);
