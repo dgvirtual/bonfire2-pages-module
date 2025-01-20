@@ -10,7 +10,7 @@ tinymce.init({
     plugins: 'code',
     setup: function (editor) {
         editor.on('blur', function () {
-            htmx.ajax('POST', '<?= site_url($url) ?>', { target: '#content_error' });
+            htmx.ajax('POST', '<?= $url ?>', { target: '#content_error' });
         });
     },
     statusbar: false,
