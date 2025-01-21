@@ -48,6 +48,9 @@ You should have a Codeigniter 4 installation with  Bonfire 2 installed (refer to
 
 4. Also review the `array $matrix` in the same file and add the `pages.*` permissions to `superadmin` and `admin` groups and the other groups that should have permissions to access the Pages module in the admin panel.
 
+Note that any changes you make in an existing installation, where you have done changes to permissions on live website via admin interface, will
+require you to delete the corresponding entries from admin interface and configure them anew, since the permissions from config in Bonfire are only picked one time, and then they are managed from database exclusively.
+
 5. Configure recycler. Edit `app/Config/Recycler.php` property `$resources` by adding `pages` to it, so it looks something like:
 
     ```php
@@ -70,7 +73,7 @@ You should have a Codeigniter 4 installation with  Bonfire 2 installed (refer to
     pattern (tinymce6-lt.js") (where `lt` stands for `Lithuanian`), and copy to your theme folder
     `themes/Admin/js/`. Language code needs to correspond to the locale code of your language as defined in `app/Config/App.php`.
 
-7. Copy Pages/Config/Pages.php file to app/Config, in the copied file change the namespace declaration to `Config` 
+7. Copy Pages/Config/Pages.php file to app/Config, in the copied file change the namespace declaration to `Config`
    and `use` line to `use App\Modules\Pages\Config\Pages;
 
 8. Get your own TinyMCE API key (https://www.tiny.cloud/auth/signup/), add a section to your project `.env` file with your api key:
@@ -84,7 +87,7 @@ You should have a Codeigniter 4 installation with  Bonfire 2 installed (refer to
 
     Without this step the page editor will be read-only.
 
-9. To update the database, run this command from the base directory of your Codeigniter install:
+9.  To update the database, run this command from the base directory of your Codeigniter install:
 
     `php spark migrate -n App\\Modules\\Pages --all`
 
@@ -92,6 +95,10 @@ You should have a Codeigniter 4 installation with  Bonfire 2 installed (refer to
 
     `php spark db:seed App\\Modules\\Pages\\Database\\Seeds\\InsertSamplePages`
 
-(on Windows replace double slashes with single). 
+(on Windows replace double slashes with single).
 
 That should be it.
+
+## Updating
+
+When updating, repeat step 2, and see if there are any significant changes in the config file `Pages.php` to be merged with the file in your `app/Config/Pages.php`.
