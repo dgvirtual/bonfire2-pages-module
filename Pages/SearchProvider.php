@@ -2,11 +2,13 @@
 
 namespace App\Modules\Pages;
 
-use Bonfire\Search\Interfaces\SearchProviderInterface;
 use App\Modules\Pages\Models\PagesModel;
+use Bonfire\Core\Traits\SearchInMeta;
+use Bonfire\Search\Interfaces\SearchProviderInterface;
 
 class SearchProvider extends PagesModel implements SearchProviderInterface
 {
+    use SearchInMeta;
     /**
      * Performs a primary search for just this resource.
      *
@@ -16,16 +18,31 @@ class SearchProvider extends PagesModel implements SearchProviderInterface
      *
      * @return array
      */
-    public function search(string $term, int $limit=10, array $post=null): array
+    public function search(string $term, int $limit = 10, array $post = null): array
     {
-        // @phpstan-ignore-next-line
-        return $this
-        ->select('pages.*')
-        ->like('title', $term, 'right', true, true)
-        ->orlike('content', $term, 'right', true, true)
-        ->orLike('category', $term, 'right', true, true)
-        ->orderBy('title', 'asc')
-        ->findAll($limit);
+        $query = $this->select('pages.*')->distinct();
+
+        $searchInMeta = setting('Pages.includeMetaFieldsInSearech');
+
+        if (!empty($searchInMeta)) {
+            // first argument is the resource entity name, second – the DB table name
+            $query->joinMetaInfo('App\Modules\Pages\Entities\Pages', 'pages');
+        }
+
+        $query->like('title', $term, 'right', true, true)
+            ->orlike('content', $term, 'right', true, true)
+            ->orLike('category', $term, 'right', true, true);
+
+        if (!empty($searchInMeta)) {
+            foreach ($searchInMeta as $metaField) {
+                // here syntax almost exactly like that of orLike()
+                $query->orLikeInMetaInfo($metaField, $term, 'both', true, true);
+            }
+        }
+
+        $query->orderBy('title', 'asc');
+
+        return $query->findAll($limit);
     }
 
     /**
