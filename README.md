@@ -101,4 +101,6 @@ That should be it.
 
 ## Updating
 
-When updating, repeat step 2, and see if there are any significant changes in the config file `Pages.php` to be merged with the file in your `app/Config/Pages.php`.
+When updating, repeat step 2, read the [changelog](CHANGELOG.md) to see what's new,
+and check if there are any significant changes in the config file `Pages.php` 
+to be merged with the file in your `app/Config/Pages.php`.
