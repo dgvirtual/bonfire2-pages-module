@@ -27,6 +27,9 @@ class PagesModel extends Model
 
     public $validationRules = [];
 
+    protected $allowCallbacks = true;
+    protected $beforeDelete   = ['deleteMeta'];
+
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -68,5 +71,29 @@ class PagesModel extends Model
                 'rules' => 'required|in_list[' . $this->categoriesKeys . ']'
             ],
         ];
+    }
+
+    /**
+     * Event-triggered method to delete page meta info if the page is being purged
+     * from the system
+     */
+    public function deleteMeta(array $data): array
+    {
+        // if it is a soft delete, return at once
+        if (! $data['purge']) {
+            return $data;
+        }
+
+        $page = $this->withDeleted()->find($data['id'][0]); // Retrieve the entity
+
+        if (! $page) {
+            return $data;
+        }
+
+        if (! empty($page->allMeta())) {
+            $page->deleteResourceMeta();
+        }
+
+        return $data;
     }
 }
