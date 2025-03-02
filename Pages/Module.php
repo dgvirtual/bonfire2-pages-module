@@ -15,9 +15,6 @@ class Module extends BaseModule
      */
     public function initAdmin()
     {
-        // true if we are on Dashboard page
-        $isDashboard = current_url() === config('App')->baseURL . '/' . ADMIN_AREA;
-
         // Add to the Content menu
         $sidebar = service('menus');
         $item    = new MenuItem([
@@ -28,41 +25,35 @@ class Module extends BaseModule
         ]);
         $sidebar->menu('sidebar')->collection('content')->addItem($item);
 
-        $widgets   = service('widgets');
-        $pages     = new PagesModel();
-        $itemId0    = 'pagesCount2347';
+        $widgets = service('widgets');
+
         $statsItem = new StatsItem([
             'bgColor' => 'bg-blue',
             'title'   => lang('Pages.pageTitle'),
             'id'      => 'pagesCount2347',
-            'value'   => (setting('Stats.Stats_' . $itemId0) === 'on' && $isDashboard) ? $pages->where('deleted_at', null)->countAllResults() : null,
             'url'     => ADMIN_AREA . '/pages',
             'faIcon'  => 'fas fa-file',
+            // 'value'   => (new PagesModel())->countAllResults(),
         ]);
+        $statsItem->addValue('auth_groups_users');
         $widgets->widget('stats')->collection('stats')->addItem($statsItem);
 
-        $itemId    = 'pagesByCategory129';
-        $statsItem = new ChartsItem([
+        $chartsItem = new ChartsItem([
             'title'    => lang('Pages.pagesClassByCat'),
             'type'     => 'pie',
-            'id'       => $itemId,
+            'id'       => 'pagesByCategoryPie129',
             'cssClass' => 'col-3',
         ]);
-        if (setting('Stats.Charts_' . $itemId) === 'on' && $isDashboard) {
-            $statsItem->addDataset('pages', 'category', 'id');
-        }
-        $widgets->widget('charts')->collection('charts')->addItem($statsItem);
+        $chartsItem->addDataset('pages', 'category', 'id');
+        $widgets->widget('charts')->collection('charts')->addItem($chartsItem);
 
-        $itemId2    = 'pagesByCategory435';
-        $statsItem2 = new ChartsItem([
+        $chartsItem1 = new ChartsItem([
             'title'    => lang('Pages.pagesClassByCat'),
             'type'     => 'bar',
-            'id'       => $itemId2,
+            'id'       => 'pagesByCategoryBar654',
             'cssClass' => 'col-6',
         ]);
-        if (setting('Stats.Charts_' . $itemId2) === 'on' && $isDashboard) {
-            $statsItem2->addDataset('pages', 'category', 'id');
-        }
-        $widgets->widget('charts')->collection('charts')->addItem($statsItem2);
+        $chartsItem1->addDataset('pages', 'category', 'id');
+        $widgets->widget('charts')->collection('charts')->addItem($chartsItem1);
     }
 }
