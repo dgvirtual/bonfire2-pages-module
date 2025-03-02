@@ -35,7 +35,7 @@ class Module extends BaseModule
             'faIcon'  => 'fas fa-file',
             // 'value'   => (new PagesModel())->countAllResults(),
         ]);
-        $statsItem->addValue('auth_groups_users');
+        $statsItem->addValue('pages');
         $widgets->widget('stats')->collection('stats')->addItem($statsItem);
 
         $chartsItem = new ChartsItem([
