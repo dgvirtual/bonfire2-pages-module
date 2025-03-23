@@ -81,8 +81,8 @@ class PagesController extends AdminController
         // TODO: transfer this to templates / views and make automatic
         // $viewMeta = service('viewMeta');
         // $viewMeta->setTitle('Sukurti puslapį' . ' | ' . setting('Site.siteName'));
-
-        $this->getTinyMCE();
+		// Change $this->getTinyMCE(); to make use of HugeRTE
+        $this->getHugeRTE();
 
         helper('form');
         return $this->render($this->viewPrefix . 'form', [
@@ -109,8 +109,9 @@ class PagesController extends AdminController
         if ($page === null) {
             return redirect()->back()->with('error', lang('Bonfire.resourceNotFound', [lang('Pages.page')]));
         }
-
-        $this->getTinyMCE();
+		
+		// Change $this->getTinyMCE(); to make use of HugeRTE
+        $this->getHugeRTE();
 
         helper('form');
         return $this->render($this->viewPrefix . 'form', [
@@ -290,15 +291,19 @@ class PagesController extends AdminController
         return $result;
     }
 
-    private function getTinyMCE()
+	// Change getTinyMCE(); to make use of HugeRTE
+    private function getHugeRTE()
     {
 
         $viewMeta = service('viewMeta');
         $viewMeta->addScript([
-            'src' => 'https://cdn.tiny.cloud/1/' . config('Pages')->tinymceApiKey . '/tinymce/6/tinymce.min.js',
+			// Need to change the URL for HugeRTE
+			'src'=> 'https://cdn.jsdelivr.net/npm/hugerte@1/hugerte.min.js',
+			//'src' => 'https://cdn.tiny.cloud/1/' . config('Pages')->tinymceApiKey . '/tinymce/6/tinymce.min.js',
             'referrerpolicy' => 'origin'
         ]);
-        $script = view('\App\Modules\Pages\Views\_tinymce', [
+		// change from vew('\App\Modules\Pages\Views\_tinymce')
+        $script = view('\App\Modules\Pages\Views\_hugerte', [
             'locale' => $this->request->getLocale(),
             'url' => $this->adminLink . 'validateField/content',
         ]);
