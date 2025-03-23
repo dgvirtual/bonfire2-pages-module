@@ -2,10 +2,9 @@
 
 namespace App\Modules\Pages;
 
+use App\Modules\Pages\Models\PagesModel;
 use Bonfire\Core\BaseModule;
 use Bonfire\Menus\MenuItem;
-
-use App\Modules\Pages\Models\PagesModel;
 use Bonfire\Widgets\Types\Charts\ChartsItem;
 use Bonfire\Widgets\Types\Stats\StatsItem;
 
@@ -27,22 +26,34 @@ class Module extends BaseModule
         $sidebar->menu('sidebar')->collection('content')->addItem($item);
 
         $widgets = service('widgets');
-        $pages = new PagesModel();
+
         $statsItem = new StatsItem([
             'bgColor' => 'bg-blue',
-            'title' => lang('Pages.pageTitle'),
-            'value' => $pages->where('deleted_at', null)->countAllResults(),
-            'url' => ADMIN_AREA . '/pages',
-            'faIcon' => 'fas fa-file',
+            'title'   => lang('Pages.pageTitle'),
+            'id'      => 'pagesCount2347',
+            'url'     => ADMIN_AREA . '/pages',
+            'faIcon'  => 'fas fa-file',
+            // 'value'   => (new PagesModel())->countAllResults(),
         ]);
-        $widgets->widget("stats")->collection('stats')->addItem($statsItem);
+        $statsItem->addValue('pages');
+        $widgets->widget('stats')->collection('stats')->addItem($statsItem);
 
-        $statsItem = new ChartsItem([
-            'title'   => lang('Pages.pagesClassByCat'),
-            'type'   => 'pie',
-            'cssClass'   => 'col-3',
+        $chartsItem = new ChartsItem([
+            'title'    => lang('Pages.pagesClassByCat'),
+            'type'     => 'pie',
+            'id'       => 'pagesByCategoryPie129',
+            'cssClass' => 'col-3',
         ]);
-        $statsItem->addDataset('pages', 'category', 'id');
-        $widgets->widget('charts')->collection('charts')->addItem($statsItem);
+        $chartsItem->addDataset('pages', 'category', 'id');
+        $widgets->widget('charts')->collection('charts')->addItem($chartsItem);
+
+        $chartsItem1 = new ChartsItem([
+            'title'    => lang('Pages.pagesClassByCat'),
+            'type'     => 'bar',
+            'id'       => 'pagesByCategoryBar654',
+            'cssClass' => 'col-6',
+        ]);
+        $chartsItem1->addDataset('pages', 'category', 'id');
+        $widgets->widget('charts')->collection('charts')->addItem($chartsItem1);
     }
 }
