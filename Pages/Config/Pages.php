@@ -12,9 +12,9 @@ class Pages extends BaseConfig
      * you can get tinyMCE Api Key at: https://www.tiny.cloud/auth/signup/
      * it will look something like bk3sgosn5c698jq71s7svqpmompgkuzm2wr7knwb4ksxhv6t
      *
-     * @var string
+     * Switching to HugeRTE requires no license or api key
      */
-    public string $tinymceApiKey = 'no-api-key';
+    // public string $tinymceApiKey = 'no-api-key';
 
     /**
      * List of meta info fields with their labels and validation rules
